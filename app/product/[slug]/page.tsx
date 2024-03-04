@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Star, Truck } from 'lucide-react';
 import React from 'react'
 export const revalidate = 10;
-async function getData(slug) {
+async function getData(slug: string) {
     const query = `*[_type == "product" && slug.current == "${slug}"][0] {
         _id,
           images,
@@ -22,7 +22,8 @@ async function getData(slug) {
     return data;
 }
 export const dynamic = "force-dynamic"
-const page = async ({ params }: { slug: string }) => {
+const page = async ({ params }: { params: { slug: string } }) => {
+
     const data: fullProduct = await getData(params.slug)
     return (
         <div className="bg-white lg:pb-10">
