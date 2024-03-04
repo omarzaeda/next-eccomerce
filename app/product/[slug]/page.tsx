@@ -21,6 +21,7 @@ async function getData(slug) {
     const data = await client.fetch(query)
     return data;
 }
+export const dynamic = "force-dynamic"
 const page = async ({ params }: { slug: string }) => {
     const data: fullProduct = await getData(params.slug)
     return (
@@ -95,4 +96,4 @@ const page = async ({ params }: { slug: string }) => {
     )
 }
 
-export default page
+export default page as React.FC<{ params: { slug: string } }>;

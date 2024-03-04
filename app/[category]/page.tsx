@@ -4,6 +4,7 @@ import { simplifiedProduct } from '../interface';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
 import ImageHover from '../components/ImageHover';
+export const dynamic = "force-dynamic"
 export const revalidate = 10;
 async function getData(cateogry: string) {
     const query = `*[_type == "product" && category->name == "${cateogry}"] {
