@@ -3,7 +3,7 @@ import { client } from '../lib/sanity'
 import Image from 'next/image';
 import { ArrowRight } from 'lucide-react';
 import Link from 'next/link';
-import ImageHover from './ImageHover';
+import { simplifiedProduct } from '../interface';
 export const revalidate = 10;
 async function getData() {
     const query = ` 
@@ -20,6 +20,7 @@ async function getData() {
     return data;
 }
 const Newest = async () => {
+
     const data = await getData()
     return (
         <div className="bg-white">
@@ -38,10 +39,19 @@ const Newest = async () => {
                 </div>
 
                 <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-                    {data.map((product) => (
+                    {data.map((product: simplifiedProduct) => (
                         <Link key={product._id} href={`/product/${product.slug}`}>
                             <div className="group relative">
-                                <ImageHover product={product} />
+                                <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
+                                    <Image
+                                        src={product.imageUrl}
+                                        alt="Product image"
+                                        className="w-full h-full object-cover object-top lg:h-full lg:w-full"
+                                        width={300}
+                                        height={300}
+                                    />
+                                </div>
+
 
                                 <div className="mt-4 flex justify-between gap-3">
                                     <div>
